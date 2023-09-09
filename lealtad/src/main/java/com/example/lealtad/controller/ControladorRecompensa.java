@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@Data
 public class ControladorRecompensa {
     private RecompensaLogica recompensaLogica;
 
