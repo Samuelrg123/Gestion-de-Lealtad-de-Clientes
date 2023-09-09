@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ControladorTransaccion {
 
     private TransaccionLogica transaccionLogica;
-
     public ControladorTransaccion(TransaccionLogica transaccionLogica) {
         this.transaccionLogica = transaccionLogica;
     }
-
     @PostMapping(path = "/transaccion/guardar")
     public RespuestaDTO registrarTransaccion(@RequestBody TransaccionDTO transaccionDTO){
         transaccionLogica.guardarTransaccion(transaccionDTO);

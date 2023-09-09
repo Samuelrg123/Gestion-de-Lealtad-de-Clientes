@@ -1,10 +1,9 @@
 package com.example.lealtad.logica;
 
-import com.example.lealtad.bd.entidad.Cliente;
 import com.example.lealtad.bd.entidad.Transaccion;
 import com.example.lealtad.bd.repository.ClienteRepository;
-import com.example.lealtad.bd.repository.PuntoRepository;
 import com.example.lealtad.bd.repository.TransaccionRepository;
+import com.example.lealtad.controller.dto.PuntoDTO;
 import com.example.lealtad.controller.dto.TransaccionDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ import java.time.LocalDate;
 public class TransaccionLogica {
     private TransaccionRepository transaccionRepository;
     private ClienteRepository clienteRepository;
-    private PuntoRepository puntoRepository;
+    private PuntoLogica puntoLogica;
     public void guardarTransaccion(TransaccionDTO transaccionDTO){
         Transaccion transaccion = new Transaccion();
         transaccion.setCliente(clienteRepository.findById(transaccionDTO.getCliente()).get());
@@ -28,14 +27,15 @@ public class TransaccionLogica {
         transaccion.setFecha_modificacion(LocalDate.now());
 
         transaccionRepository.save(transaccion);
-
-        actualizarPuntosCliente(transaccionDTO.getCliente(), puntosGenerados);
+        PuntoDTO puntoDTO = new PuntoDTO(transaccionDTO.getCliente());
+        actualizarPuntosCliente(puntoDTO,puntosGenerados);
     }
 
-    private void actualizarPuntosCliente(int cedulaCliente, double puntosGenerados) {
-        double puntosActuales = puntoRepository.findPuntosAcumuladosByCliente(cedulaCliente);
+    private void actualizarPuntosCliente(PuntoDTO puntoDTO, double puntosGenerados) {
+        double puntosActuales = puntoLogica.obtenerPuntosActuales(puntoDTO);
         double puntosAcumulados = puntosGenerados + puntosActuales;
-        puntoRepository.updatePuntosetPuntosAcumulados(cedulaCliente,puntosAcumulados);
+        puntoDTO.setPuntosAcumulados(puntosAcumulados);
+        puntoLogica.actualizarPuntos(puntoDTO);
     }
 
     private double calcularPuntosGenerados(int monto) {
