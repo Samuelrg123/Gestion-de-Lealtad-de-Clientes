@@ -28,9 +28,9 @@ public class Cliente {
     @Column
     private int telefono;
 
-    @Column
-    private LocalDate fecha_creacion;
+    @Column(name = "fecha_creacion")
+    private LocalDate fechaCreacion;
 
-    @Column
-    private LocalDate fecha_modificacion;
+    @Column(name = "fecha_modificacion")
+    private LocalDate fechaModificacion;
 }

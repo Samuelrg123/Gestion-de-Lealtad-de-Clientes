@@ -1,4 +1,5 @@
 package com.example.lealtad.controller;
+
 import com.example.lealtad.controller.dto.ClienteDTO;
 import com.example.lealtad.controller.dto.RespuestaDTO;
 import com.example.lealtad.logica.ClienteLogica;
@@ -14,7 +15,7 @@ public class ControladorCliente {
     }
 
     @PostMapping(path = "/cliente/guardar")
-    public RespuestaDTO guardarCliente(@RequestBody ClienteDTO clienteDTO){
+    public RespuestaDTO guardarCliente(@RequestBody ClienteDTO clienteDTO) {
         clienteLogica.guardarCliente(clienteDTO);
         return new RespuestaDTO("Cliente registrado correctamente");
     }

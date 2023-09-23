@@ -6,26 +6,24 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table
+@Table(name = "historial_redencion")
 @Data
-public class Transaccion {
+public class HistorialRedencion {
     @Id
-    @Column
+    @Column(name = "ID_redencion")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idTransaccion;
+    private int idRedencion;
 
     @ManyToOne
     @JoinColumn(name = "ID_cliente", referencedColumnName = "cedula")
     private Cliente cliente;
 
-    @Column(name = "fecha_transaccion")
-    private LocalDate fechaTransaccion;
+    @ManyToOne
+    @JoinColumn(name = "ID_recompensa", referencedColumnName = "id_recompensa")
+    private Recompensa recompensa;
 
-    @Column
-    private int monto;
-
-    @Column(name = "puntos_generados")
-    private double puntosGenerados;
+    @Column(name = "fecha_redencion")
+    private LocalDate fechaRedencion;
 
     @Column(name = "fecha_creacion")
     private LocalDate fechaCreacion;
