@@ -16,19 +16,20 @@ public class TransaccionLogica {
     private TransaccionRepository transaccionRepository;
     private ClienteRepository clienteRepository;
     private PuntoLogica puntoLogica;
-    public void guardarTransaccion(TransaccionDTO transaccionDTO){
+
+    public void guardarTransaccion(TransaccionDTO transaccionDTO) {
         Transaccion transaccion = new Transaccion();
         transaccion.setCliente(clienteRepository.findById(transaccionDTO.getCliente()).get());
-        transaccion.setFecha_transaccion(LocalDate.now());
+        transaccion.setFechaTransaccion(LocalDate.now());
         transaccion.setMonto(transaccionDTO.getMonto());
         double puntosGenerados = calcularPuntosGenerados(transaccionDTO.getMonto());
-        transaccion.setPuntos_generados(puntosGenerados);
-        transaccion.setFecha_creacion(LocalDate.now());
-        transaccion.setFecha_modificacion(LocalDate.now());
+        transaccion.setPuntosGenerados(puntosGenerados);
+        transaccion.setFechaCreacion(LocalDate.now());
+        transaccion.setFechaModificacion(LocalDate.now());
 
         transaccionRepository.save(transaccion);
         PuntoDTO puntoDTO = new PuntoDTO(transaccionDTO.getCliente());
-        actualizarPuntosCliente(puntoDTO,puntosGenerados);
+        actualizarPuntosCliente(puntoDTO, puntosGenerados);
     }
 
     private void actualizarPuntosCliente(PuntoDTO puntoDTO, double puntosGenerados) {
@@ -40,7 +41,7 @@ public class TransaccionLogica {
 
     private double calcularPuntosGenerados(int monto) {
         double PuntosPorDolar = 0.5;
-        return (monto*PuntosPorDolar);
+        return (monto * PuntosPorDolar);
     }
 }
 

@@ -1,4 +1,5 @@
 package com.example.lealtad.controller.dto;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NonNull;

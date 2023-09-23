@@ -10,20 +10,20 @@ import java.time.LocalDate;
 @Data
 public class Punto {
     @Id
-    @Column
+    @Column(name = "ID_puntos")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPuntos;
 
     @OneToOne
-    @JoinColumn(name = "ID_cliente",referencedColumnName = "cedula")
+    @JoinColumn(name = "ID_cliente", referencedColumnName = "cedula")
     private Cliente cliente;
 
-    @Column
-    private double puntos_acumulados;
+    @Column(name = "puntos_acumulados")
+    private double puntosAcumulados;
 
-    @Column
-    private LocalDate fecha_creacion;
+    @Column(name = "fecha_creacion")
+    private LocalDate fechaCreacion;
 
-    @Column
-    private LocalDate fecha_acumulacion;
+    @Column(name = "fecha_acumulacion")
+    private LocalDate fechaAcumulacion;
 }

@@ -12,5 +12,5 @@ public class RecompensaDTO {
     @NonNull
     private int cedula;
 
-    private int id_recompensa;
+    private int idRecompensa;
 }

@@ -9,11 +9,12 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class PuntoLogica {
     private PuntoRepository puntoRepository;
-    public double obtenerPuntosActuales(PuntoDTO puntoDTO){
+
+    public double obtenerPuntosActuales(PuntoDTO puntoDTO) {
         return puntoRepository.findPuntosAcumuladosByCliente(puntoDTO.getCliente());
     }
 
-    public void actualizarPuntos(PuntoDTO puntoDTO){
+    public void actualizarPuntos(PuntoDTO puntoDTO) {
         puntoRepository.updatePuntosetPuntosAcumulados(puntoDTO.getCliente(), puntoDTO.getPuntosAcumulados());
     }
 }
