@@ -28,12 +28,12 @@ public class TransaccionLogica {
         transaccion.setFechaModificacion(LocalDate.now());
 
         transaccionRepository.save(transaccion);
-        PuntoDTO puntoDTO = new PuntoDTO(transaccionDTO.getCliente());
-        actualizarPuntosCliente(puntoDTO, puntosGenerados);
     }
 
-    private void actualizarPuntosCliente(PuntoDTO puntoDTO, double puntosGenerados) {
+    public void actualizarPuntosCliente(TransaccionDTO transaccionDTO) {
+        PuntoDTO puntoDTO = new PuntoDTO(transaccionDTO.getCliente());
         double puntosActuales = puntoLogica.obtenerPuntosActuales(puntoDTO);
+        double puntosGenerados = calcularPuntosGenerados(transaccionDTO.getMonto());
         double puntosAcumulados = puntosGenerados + puntosActuales;
         puntoDTO.setPuntosAcumulados(puntosAcumulados);
         puntoLogica.actualizarPuntos(puntoDTO);
