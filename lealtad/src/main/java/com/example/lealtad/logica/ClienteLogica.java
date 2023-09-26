@@ -29,7 +29,7 @@ public class ClienteLogica {
         clienteRepository.save(cliente);
 
         Punto punto = new Punto();
-        punto.setCliente(clienteRepository.findById(cliente.getCedula()).get());
+        punto.setCliente(cliente);
         punto.setPuntosAcumulados(0);
         punto.setFechaCreacion(LocalDate.now());
         punto.setFechaAcumulacion(LocalDate.now());

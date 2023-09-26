@@ -19,6 +19,7 @@ public class ControladorTransaccion {
     @PostMapping(path = "/transaccion/guardar")
     public RespuestaDTO registrarTransaccion(@RequestBody TransaccionDTO transaccionDTO) {
         transaccionLogica.guardarTransaccion(transaccionDTO);
+        transaccionLogica.actualizarPuntosCliente(transaccionDTO);
         return new RespuestaDTO("Transacción guardada exitosamente y puntos acumulados actualizados");
     }
 }
