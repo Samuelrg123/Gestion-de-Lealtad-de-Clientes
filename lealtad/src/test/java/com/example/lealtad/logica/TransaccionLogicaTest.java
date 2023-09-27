@@ -66,9 +66,10 @@ class TransaccionLogicaTest {
         transaccionDTO.setMonto(2);
 
         PuntoDTO puntoDTO = new PuntoDTO(transaccionDTO.getCliente());
+
         when(puntoLogica.obtenerPuntosActuales(puntoDTO)).thenReturn(0.0);
-        doNothing().when(puntoLogica).actualizarPuntos(puntoDTO);
         transaccionLogica.actualizarPuntosCliente(transaccionDTO);
+        puntoDTO.setPuntosAcumulados(1);
         Mockito.verify(puntoLogica).actualizarPuntos(puntoDTO);
 
     }
