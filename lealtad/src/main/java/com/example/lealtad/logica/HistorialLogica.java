@@ -22,16 +22,12 @@ public class HistorialLogica {
     private RecompensaRepository recompensaRepository;
 
     public List<DetalleHistorialDTO> obtenerHistorial(HistorialDTO historialDTO) {
-        try {
-            historialRepository.findAllByCliente(historialDTO.getCedulaCliente());
-            return historialRepository.findAllByCliente(historialDTO.getCedulaCliente())
-                    .stream()
-                    .map(historialRedencion -> new DetalleHistorialDTO(historialRedencion.getIdRedencion(), historialRedencion.getCliente().getNombre(),
-                            historialRedencion.getCliente().getApellido(), historialRedencion.getRecompensa().getIdRecompensa(), historialRedencion.getRecompensa().getNombre(),
-                            historialRedencion.getRecompensa().getDescripcion(), historialRedencion.getRecompensa().getPuntosNecesarios(), historialRedencion.getFechaRedencion())).collect(Collectors.toList());
-        } catch (IllegalArgumentException e) {
-            return Collections.emptyList();
-        }
+        historialRepository.findAllByCliente(historialDTO.getCedulaCliente());
+        return historialRepository.findAllByCliente(historialDTO.getCedulaCliente())
+                .stream()
+                .map(historialRedencion -> new DetalleHistorialDTO(historialRedencion.getIdRedencion(), historialRedencion.getCliente().getNombre(),
+                        historialRedencion.getCliente().getApellido(), historialRedencion.getRecompensa().getIdRecompensa(), historialRedencion.getRecompensa().getNombre(),
+                        historialRedencion.getRecompensa().getDescripcion(), historialRedencion.getRecompensa().getPuntosNecesarios(), historialRedencion.getFechaRedencion())).collect(Collectors.toList());
     }
 
     public void registrarRecompensaRedimida(HistorialDTO historialDTO) {
