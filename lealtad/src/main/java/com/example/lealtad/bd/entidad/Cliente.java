@@ -26,7 +26,7 @@ public class Cliente {
     private String correo;
 
     @Column
-    private int telefono
+    private int telefono;
 
     @Column(name = "fecha_creacion")
     private LocalDate fechaCreacion;
