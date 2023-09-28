@@ -20,7 +20,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
       - name: Execute Gradle build
-        run: ./gradlew build
+        run: cd lealtad && ./gradlew build
       # generates coverage-report.md and publishes as checkrun
       - name: JaCoCo Coverage Report
         id: jacoco_reporter
