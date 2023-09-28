@@ -42,4 +42,10 @@ test {
 }
 jacocoTestReport {
 	dependsOn test // tests are required to run before generating the report
+	// Excluye los paquetes específicos de los informes
+	afterEvaluate {
+		classDirectories = files(classDirectories.files.collect {
+			fileTree(dir: it, exclude: ['com/example/lealtad/controller/dto/**', 'com/example/lealtad/bd/entidad/**'])
+		})
+	}
 }
