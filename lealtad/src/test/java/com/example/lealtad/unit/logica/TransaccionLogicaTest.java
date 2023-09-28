@@ -1,4 +1,4 @@
-package com.example.lealtad.logica;
+package com.example.lealtad.unit.logica;
 
 import com.example.lealtad.bd.entidad.Cliente;
 import com.example.lealtad.bd.entidad.Transaccion;
@@ -6,6 +6,8 @@ import com.example.lealtad.bd.repository.ClienteRepository;
 import com.example.lealtad.bd.repository.TransaccionRepository;
 import com.example.lealtad.controller.dto.PuntoDTO;
 import com.example.lealtad.controller.dto.TransaccionDTO;
+import com.example.lealtad.logica.PuntoLogica;
+import com.example.lealtad.logica.TransaccionLogica;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,7 +22,6 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class TransaccionLogicaTest {
-
     @Mock
     private TransaccionRepository transaccionRepository;
     @Mock
@@ -31,7 +32,7 @@ class TransaccionLogicaTest {
     TransaccionLogica transaccionLogica;
 
     @Test
-    void Dado_transaccion_cliente_1_monto_2_Cuando_guarde_Entonces_puntosacumulados_1_guardaTransaccion() {
+    void Dado_transaccion_cliente_1_monto_2_Cuando_guardarTransaccion_Entonces_puntosacumulados_1_guardaTransaccion() {
         Cliente cliente = new Cliente();
         cliente.setCedula(1);
         cliente.setNombre("Prueba");
@@ -60,7 +61,7 @@ class TransaccionLogicaTest {
     }
 
     @Test
-    void Dado_transaccion_cliente_1_monto_2_Cuando_actualicePuntos_Entonces_puntosActuales_0_puntosAcumulados_1_puntosAcumulados_1_actualizarPuntos() {
+    void Dado_transaccion_cliente_1_monto_2_Cuando_actualicePuntos_Entonces_puntosActuales_0_puntosAcumulados_1_y_actualizarPuntos() {
         TransaccionDTO transaccionDTO = new TransaccionDTO();
         transaccionDTO.setCliente(1);
         transaccionDTO.setMonto(2);

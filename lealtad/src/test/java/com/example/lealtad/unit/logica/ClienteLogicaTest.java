@@ -1,10 +1,11 @@
-package com.example.lealtad.logica;
+package com.example.lealtad.unit.logica;
 
 import com.example.lealtad.bd.entidad.Cliente;
 import com.example.lealtad.bd.entidad.Punto;
 import com.example.lealtad.bd.repository.ClienteRepository;
 import com.example.lealtad.bd.repository.PuntoRepository;
 import com.example.lealtad.controller.dto.ClienteDTO;
+import com.example.lealtad.logica.ClienteLogica;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
