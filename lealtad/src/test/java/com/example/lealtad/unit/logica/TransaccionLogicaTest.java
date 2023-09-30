@@ -43,7 +43,7 @@ class TransaccionLogicaTest {
         cliente.setFechaModificacion(LocalDate.now());
 
         TransaccionDTO transaccionDTO = new TransaccionDTO();
-        transaccionDTO.setCliente(1);
+        transaccionDTO.setCliente(cliente.getCedula());
         transaccionDTO.setMonto(2);
 
         Transaccion transaccion = new Transaccion();
@@ -61,17 +61,18 @@ class TransaccionLogicaTest {
     }
 
     @Test
-    void Dado_transaccion_cliente_1_monto_2_Cuando_actualicePuntos_Entonces_puntosActuales_0_puntosAcumulados_1_y_actualizarPuntos() {
+    void Dado_transaccion_cliente_1_monto_2_Cuando_actualicePuntos_puntosActuales_0_puntosAcumulados_1_Entonces_actualizarPuntos() {
         TransaccionDTO transaccionDTO = new TransaccionDTO();
         transaccionDTO.setCliente(1);
         transaccionDTO.setMonto(2);
 
-        PuntoDTO puntoDTO = new PuntoDTO(transaccionDTO.getCliente());
+        PuntoDTO puntoDTO = new PuntoDTO();
+        puntoDTO.setCliente(transaccionDTO.getCliente());
 
         when(puntoLogica.obtenerPuntosActuales(puntoDTO)).thenReturn(0.0);
         transaccionLogica.actualizarPuntosCliente(transaccionDTO);
         puntoDTO.setPuntosAcumulados(1);
-        Mockito.verify(puntoLogica).actualizarPuntos(puntoDTO);
 
+        Mockito.verify(puntoLogica).actualizarPuntos(puntoDTO);
     }
 }

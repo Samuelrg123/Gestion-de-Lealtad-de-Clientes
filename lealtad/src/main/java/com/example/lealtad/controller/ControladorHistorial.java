@@ -1,6 +1,5 @@
 package com.example.lealtad.controller;
 
-import com.example.lealtad.bd.entidad.HistorialRedencion;
 import com.example.lealtad.controller.dto.DetalleHistorialDTO;
 import com.example.lealtad.controller.dto.HistorialDTO;
 import com.example.lealtad.logica.HistorialLogica;
@@ -13,12 +12,13 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-
 public class ControladorHistorial {
     private HistorialLogica historialLogica;
 
     @GetMapping("/historial-redenciones")
     public List<DetalleHistorialDTO> revisarHistorialRecompensas(@RequestParam int cedula) {
-        return historialLogica.obtenerHistorial(new HistorialDTO(cedula));
+        HistorialDTO historialDTO = new HistorialDTO();
+        historialDTO.setCedulaCliente(cedula);
+        return historialLogica.obtenerHistorial(historialDTO);
     }
 }

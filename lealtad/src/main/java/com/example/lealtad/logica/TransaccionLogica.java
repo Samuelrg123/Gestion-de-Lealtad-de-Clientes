@@ -31,7 +31,8 @@ public class TransaccionLogica {
     }
 
     public void actualizarPuntosCliente(TransaccionDTO transaccionDTO) {
-        PuntoDTO puntoDTO = new PuntoDTO(transaccionDTO.getCliente());
+        PuntoDTO puntoDTO = new PuntoDTO();
+        puntoDTO.setCliente(transaccionDTO.getCliente());
         double puntosActuales = puntoLogica.obtenerPuntosActuales(puntoDTO);
         double puntosGenerados = calcularPuntosGenerados(transaccionDTO.getMonto());
         double puntosAcumulados = puntosGenerados + puntosActuales;

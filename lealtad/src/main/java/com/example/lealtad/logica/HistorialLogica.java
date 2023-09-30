@@ -10,7 +10,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,12 +21,7 @@ public class HistorialLogica {
     private RecompensaRepository recompensaRepository;
 
     public List<DetalleHistorialDTO> obtenerHistorial(HistorialDTO historialDTO) {
-        historialRepository.findAllByCliente(historialDTO.getCedulaCliente());
-        return historialRepository.findAllByCliente(historialDTO.getCedulaCliente())
-                .stream()
-                .map(historialRedencion -> new DetalleHistorialDTO(historialRedencion.getIdRedencion(), historialRedencion.getCliente().getNombre(),
-                        historialRedencion.getCliente().getApellido(), historialRedencion.getRecompensa().getIdRecompensa(), historialRedencion.getRecompensa().getNombre(),
-                        historialRedencion.getRecompensa().getDescripcion(), historialRedencion.getRecompensa().getPuntosNecesarios(), historialRedencion.getFechaRedencion())).collect(Collectors.toList());
+        return historialRepository.findAllByCliente(historialDTO.getCedulaCliente()).stream().map(historialRedencion -> new DetalleHistorialDTO(historialRedencion.getIdRedencion(), historialRedencion.getCliente().getNombre(), historialRedencion.getCliente().getApellido(), historialRedencion.getRecompensa().getIdRecompensa(), historialRedencion.getRecompensa().getNombre(), historialRedencion.getRecompensa().getDescripcion(), historialRedencion.getRecompensa().getPuntosNecesarios(), historialRedencion.getFechaRedencion())).collect(Collectors.toList());
     }
 
     public void registrarRecompensaRedimida(HistorialDTO historialDTO) {

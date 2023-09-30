@@ -37,7 +37,8 @@ class HistorialLogicaTest {
 
     @Test
     void Dado_historialDTO_de_cliente_id_1_con2RecompensaRedimidas_Cuando_obtenerHistorial_Entonces_obtener_lista_DetalleHistorialDTO_con2RecompensasEnHistorial() {
-        HistorialDTO historialDTO = new HistorialDTO(1);
+        HistorialDTO historialDTO = new HistorialDTO();
+        historialDTO.setCedulaCliente(1);
 
         Cliente cliente = new Cliente();
         cliente.setCedula(1);

@@ -12,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.OngoingStubbing;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -34,8 +33,25 @@ class RecompensaLogicaTest {
     RecompensaLogica recompensaLogica;
 
     @Test
-    void buscarRecompensasPorCliente() {
-        RecompensaDTO recompensaDTO = new RecompensaDTO(1);
+    void Dado_recompensa_Cuando_guarde_Entonces_guardaRecompensa() {
+        RecompensaEntidadDTO recompensaEntidadDTO = new RecompensaEntidadDTO(1, "Tarjeta $10", "Recibe una tarjeta de regalo de $10 para gastar en nuestra tienda", 20);
+        Recompensa recompensa = new Recompensa();
+        recompensa.setIdRecompensa(recompensaEntidadDTO.getIdRecompensa());
+        recompensa.setNombre(recompensaEntidadDTO.getNombre());
+        recompensa.setDescripcion(recompensaEntidadDTO.getDescripcion());
+        recompensa.setPuntosNecesarios(recompensaEntidadDTO.getPuntosNecesarios());
+        recompensa.setFechaCreacion(LocalDate.now());
+        recompensa.setFechaModificacion(LocalDate.now());
+
+        recompensaLogica.guardarRecompensa(recompensaEntidadDTO);
+
+        Mockito.verify(recompensaRepository).save(recompensa);
+    }
+
+    @Test
+    void Dado_cliente_puntosCliente3_Cuando_buscarRecompensasPorCliente_Entonces_devuelve_detalleRecompensaDTO_recompensaConPuntosNecesariosMenoresoIguales_a_3() {
+        RecompensaDTO recompensaDTO = new RecompensaDTO();
+        recompensaDTO.setCedula(1);
 
         Recompensa recompensa_1 = new Recompensa();
         recompensa_1.setIdRecompensa(1);
@@ -61,8 +77,10 @@ class RecompensaLogicaTest {
         detalleRecompensaDTOListaEsperada.add(detalleRecompensaDTO_1);
 
         double puntosCliente = 3.0;
+        PuntoDTO puntoDTO = new PuntoDTO();
+        puntoDTO.setCliente(recompensaDTO.getCedula());
 
-        when(puntoLogica.obtenerPuntosActuales(new PuntoDTO(recompensaDTO.getCedula()))).thenReturn(puntosCliente);
+        when(puntoLogica.obtenerPuntosActuales(puntoDTO)).thenReturn(puntosCliente);
         when(recompensaRepository.findAllInfoRecompensasByPuntosCliente(puntosCliente)).thenReturn(recompensaEntityList);
 
         List<DetalleRecompensaDTO> detalleRecompensaDTOListaActual = recompensaLogica.buscarRecompensasPorCliente(recompensaDTO);
@@ -116,7 +134,10 @@ class RecompensaLogicaTest {
         recompensa.setFechaCreacion(LocalDate.now());
         recompensa.setFechaModificacion(LocalDate.now());
 
-        OngoingStubbing<Double> puntosCliente = when(puntoLogica.obtenerPuntosActuales(new PuntoDTO(1))).thenReturn(0.0);
+        PuntoDTO puntoDTO = new PuntoDTO();
+        puntoDTO.setCliente(1);
+
+        when(puntoLogica.obtenerPuntosActuales(puntoDTO)).thenReturn(0.0);
         when(recompensaRepository.findById(1)).thenReturn(Optional.of(recompensa));
         RespuestaDTO respuestaDTOEsperada = new RespuestaDTO("No cumple con la cantidad de puntos para redimir esta recompensa. revise http://localhost:8080/recompensas/" + recompensaDTO.getCedula() + " para conocer las recompensas a las que puede acceder actualmente");
 
@@ -136,7 +157,10 @@ class RecompensaLogicaTest {
         recompensa.setFechaCreacion(LocalDate.now());
         recompensa.setFechaModificacion(LocalDate.now());
 
-        when(puntoLogica.obtenerPuntosActuales(new PuntoDTO(1))).thenReturn(3.0);
+        PuntoDTO puntoDTO = new PuntoDTO();
+        puntoDTO.setCliente(1);
+
+        when(puntoLogica.obtenerPuntosActuales(puntoDTO)).thenReturn(3.0);
         double puntosActulizados = 1;
         when(recompensaRepository.findById(1)).thenReturn(Optional.of(recompensa));
         RespuestaDTO respuestaDTOEsperada = new RespuestaDTO("Recompensa redimida y registrada con exito. Se han descontado los puntos al cliente");

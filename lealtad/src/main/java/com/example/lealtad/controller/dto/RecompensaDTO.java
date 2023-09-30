@@ -1,16 +1,11 @@
 package com.example.lealtad.controller.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Data
 public class RecompensaDTO {
-    @NonNull
     private int cedula;
-
     private int idRecompensa;
 }
