@@ -21,7 +21,7 @@ Y en: Editar/editar datos para poder visualzar las propiedades de cada paquete.
 
 4. Historial de Transacciones: Consultar un historial detallado de las transacciones realizadas por cada cliente en el programa de lealtad."
 
-VueJS
+## VueJS
 
 Para ejecutar el proyecto en VueJS, se requieren los siguientes pasos:
 
@@ -86,7 +86,7 @@ GET /api/transactions/?customer_id=1
 
 Este proyecto es un punto de partida para crear un programa de lealtad para empresas comerciales. Los usuarios pueden personalizar el proyecto para satisfacer sus necesidades específicas.
 
-Personalización
+## Personalización
 
 El proyecto se puede personalizar de la siguiente manera:
 
