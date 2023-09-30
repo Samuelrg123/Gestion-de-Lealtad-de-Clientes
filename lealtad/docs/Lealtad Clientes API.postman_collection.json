@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "6f7a8da9-4c28-467a-8f0c-d67f3118438a",
+		"name": "Lealtad Clientes API",
+		"description": "Requests para la API de leatad de clientes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29410534"
+	},
+	"item": [
+		{
+			"name": "Controlador Cliente",
+			"item": [
+				{
+					"name": "GuardarCliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"cedula\":1,\r\n    \"nombre\":\"Lionel\",\r\n    \"apellido\":\"Messi\",\r\n    \"correo\":\"goatmessi@elmejordelmundo.com\",\r\n    \"telefono\":111\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/cliente/guardar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cliente",
+								"guardar"
+							]
+						},
+						"description": "Para el uso del endpoint se deben especificar los campos siguientes campos de JSON para la información del cliente:\n\n| Campo | Tipo |\n| --- | --- |\n| cedula | int |\n| nombre | string |\n| apellido | string |\n| correo | string |\n| telefono | int |"
+					},
+					"response": []
+				}
+			],
+			"description": "**Cuenta con 1 endpoint**\n\n- /cliente/guardar"
+		},
+		{
+			"name": "Controlador Transaccion",
+			"item": [
+				{
+					"name": "GuardarTransaccion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cliente\":3,\r\n    \"fecha_transaccion\":\"2023-09-08\",\r\n    \"monto\":100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/transaccion/guardar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transaccion",
+								"guardar"
+							]
+						},
+						"description": "Para el uso del endpoint se deben especificar los campos siguientes campos de JSON para la información de la transacción:\n\n| Campo | Tipo |\n| --- | --- |\n| cliente | int |\n| fecha_transaccion | Date |\n| monto | int |"
+					},
+					"response": []
+				}
+			],
+			"description": "**Cuenta con 1 endpoint**\n\n- /transaccion/guardar"
+		},
+		{
+			"name": "Controlador Recompensa",
+			"item": [
+				{
+					"name": "GuardarRecompensa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_recompensa\":7,\r\n    \"nombre\": \"Viaje Paris\",\r\n    \"descripcion\": \"Obtén un viaje a Paris Francia, tiquetes ida y regreso, estadía, comidas y transporte\",\r\n    \"puntosNecesarios\": 600 \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/recompensa/guardar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"recompensa",
+								"guardar"
+							]
+						},
+						"description": "Para el uso del endpoint se deben especificar los campos siguientes campos de JSON para la información de la recompensa:\n\n| Campo | Tipo |\n| --- | --- |\n| id_recompensa | int |\n| nombre | String |\n| descripcion | String |\n| puntosNecesarios | int |"
+					},
+					"response": []
+				},
+				{
+					"name": "VerRecompensas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/recompensas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"recompensas"
+							]
+						},
+						"description": "Se devolvera una lista completa de todas las recompesas y beneficios en el programa de lealtad"
+					},
+					"response": []
+				},
+				{
+					"name": "VerRecompensasDisponiblesParaCliente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/recompensas/1000794000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"recompensas",
+								"1000794000"
+							]
+						},
+						"description": "En este caso se miran las recompensas a las que puede acceder el cliente con cedula 1000794000"
+					},
+					"response": []
+				},
+				{
+					"name": "RedimirRecompensa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cedula\":1000794000,\r\n    \"id_recompensa\":5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/redimir-recompensa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"redimir-recompensa"
+							]
+						},
+						"description": "Para el uso del endpoint se deben especificar los campos siguientes campos de JSON para la información de la recompensa:\n\n| Campo | Tipo |\n| --- | --- |\n| cedula | Int |\n| id_recompensa | int |"
+					},
+					"response": []
+				}
+			],
+			"description": "**Cuenta con 4 endpoint**\n\n- /recompensa/guardar\n- /recompensas\n- /recompesas/{cedula}\n- /redimir-recompensa"
+		},
+		{
+			"name": "Controlador Historial",
+			"item": [
+				{
+					"name": "HistorialRecompensasRedimidasPorCliente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/historial-redenciones?cedula=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"historial-redenciones"
+							],
+							"query": [
+								{
+									"key": "cedula",
+									"value": "3"
+								}
+							]
+						},
+						"description": "Para este endpoint se debe especificar el valor de la cedula del cliente al que se quiere revisar su historial de redención de recompensas y beneficios en el programa de lealtad\n\nEn este ejemplo se revisa el cliente con cedula 3"
+					},
+					"response": []
+				}
+			],
+			"description": "**Cuenta con 1 endpoint**\n\n- /historial-redencion?cedula=###"
+		}
+	]
+}
