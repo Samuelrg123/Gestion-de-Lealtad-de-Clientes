@@ -22,7 +22,8 @@ class PuntoLogicaTest {
 
     @Test
     void Dado_cliente_con_puntos_2_Cuando_findPuntosAcumuladosByCliente_Entonces_puntosActuales_2() {
-        PuntoDTO puntoDTO = new PuntoDTO(1);
+        PuntoDTO puntoDTO = new PuntoDTO();
+        puntoDTO.setCliente(1);
         double puntos = 2.0;
 
         when(puntoRepository.findPuntosAcumuladosByCliente(1)).thenReturn(puntos);
@@ -33,7 +34,8 @@ class PuntoLogicaTest {
 
     @Test
     void Dado_cliente_con_puntosAcumulados_2_Cuando_actualizarPuntos_Entonces_updatePuntossetPuntosAcumulados() {
-        PuntoDTO puntoDTO = new PuntoDTO(1);
+        PuntoDTO puntoDTO = new PuntoDTO();
+        puntoDTO.setCliente(1);
         puntoDTO.setPuntosAcumulados(2);
 
         doNothing().when(puntoRepository).updatePuntosetPuntosAcumulados(anyInt(), anyDouble());

@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Data
-public class DetalleRecompensaDTO {
+public class RecompensaEntidadDTO {
+    private int idRecompensa;
     private String nombre;
     private String descripcion;
     private int puntosNecesarios;
