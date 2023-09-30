@@ -78,7 +78,7 @@ GET /api/transactions/?customer_id=1
 
 Este proyecto es un punto de partida para crear un programa de lealtad para empresas comerciales. Los usuarios pueden personalizar el proyecto para satisfacer sus necesidades específicas.
 
-** Personalización
+## Personalización
 
 El proyecto se puede personalizar de la siguiente manera:
 
