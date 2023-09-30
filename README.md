@@ -11,7 +11,7 @@ Y en: Editar/editar datos para poder visualzar las propiedades de cada paquete.
 3). Diagrama de componentes.
 
 
-#Permite a las empresas comerciales gestionar programas de lealtad para sus clientes. Los usuarios podrían utilizar la API para realizar lo siguiente:
+# Permite a las empresas comerciales gestionar programas de lealtad para sus clientes. Los usuarios podrían utilizar la API para realizar lo siguiente:
 "1. Registro de Clientes: Agregar nuevos clientes a la base de datos del programa de lealtad.
 
 2. Acumulación de Puntos: Registrar y actualizar los puntos acumulados por los clientes por cada compra realizada.
