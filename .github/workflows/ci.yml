@@ -21,14 +21,8 @@ jobs:
         uses: gradle/gradle-build-action@v2
       - name: Execute Gradle build
         run: cd lealtad && ./gradlew build
-      # generates coverage-report.md and publishes as checkrun
-      - name: JaCoCo Coverage Report
-        id: jacoco
-        uses: madrapps/jacoco-report@v1.6.1
+      - name: Generate JaCoCo Badge
+        uses: cicirello/jacoco-badge-generator@v2
         with:
-          paths: |
-            ${{ github.workspace }}/**/build/reports/jacoco/prodNormalDebugCoverage/prodNormalDebugCoverage.xml,
-            ${{ github.workspace }}/**/build/reports/jacoco/**/debugCoverage.xml
-          token: ${{ secrets.GITHUB_TOKEN }}
-          min-coverage-overall: 40
-          min-coverage-changed-files: 60
+          generate-branches-badge: true
+          jacoco-csv-file: lealtad/build/reports/jacoco/test/jacocoTestReport.csv
