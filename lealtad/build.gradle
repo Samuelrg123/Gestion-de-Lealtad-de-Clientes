@@ -3,7 +3,7 @@ plugins {
 	id 'org.springframework.boot' version '2.7.15'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	id 'jacoco'
-
+	id 'info.solidsoft.pitest' version '1.15.0'
 }
 
 group = 'com.example'
@@ -38,6 +38,7 @@ tasks.named('test') {
 }
 
 test {
+	systemProperty 'pitest.logging.verbose', 'true'
 	finalizedBy jacocoTestReport // report is always generated after tests run
 }
 jacocoTestReport {
@@ -48,4 +49,12 @@ jacocoTestReport {
 			fileTree(dir: it, exclude: ['com/example/lealtad/controller/dto/**', 'com/example/lealtad/bd/entidad/**'])
 		})
 	}
+}
+
+pitest {
+	distsDirectory
+	junit5PluginVersion = '1.2.0'
+	verbose = true
+	targetClasses = ['com.example.*']
+	excludedClasses = ['com.example.lealtad.controller.dto.**', 'com.example.lealtad.bd.entidad.**']
 }
