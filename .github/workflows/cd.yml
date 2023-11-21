@@ -1,0 +1,21 @@
+name: Continuous Delivery
+
+on:
+  push:
+    branches: ["main"]
+permissions:
+  contents: read
+jobs:
+  cd_backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: mr-smithers-excellent/docker-build-push@v6
+        name: Build & push Docker image
+        with:
+          image: samuelrg123/lealtad
+          tags: v1.0,latest
+          registry: docker.io
+          dockerfile: lealtad/Dockerfile
+          username: ${{ secrets.USERNAME_DOCKER }}
+          password: ${{ secrets.PASSWORD_DOCKER }}
