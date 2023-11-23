@@ -1,9 +1,16 @@
 version: '3.9'
 
 services:
+  frontend:
+    container_name: frontend_react
+    build: ./frontend
+    ports:
+      - 3000:3000
+    depends_on:
+      - lealtad_app
   lealtad_app:
     container_name: lealtad_app
-    image: lealtad-app:1.0.0
+    image: lealtad-app:1.1.0
     build:
       context: .
     ports:
