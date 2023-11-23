@@ -139,7 +139,7 @@ class RecompensaLogicaTest {
 
         when(puntoLogica.obtenerPuntosActuales(puntoDTO)).thenReturn(0.0);
         when(recompensaRepository.findById(1)).thenReturn(Optional.of(recompensa));
-        RespuestaDTO respuestaDTOEsperada = new RespuestaDTO("No cumple con la cantidad de puntos para redimir esta recompensa. revise http://localhost:8080/recompensas/" + recompensaDTO.getCedula() + " para conocer las recompensas a las que puede acceder actualmente");
+        RespuestaDTO respuestaDTOEsperada = new RespuestaDTO("No cumple con la cantidad de puntos para redimir esta recompensa. Revise Recompensas Por Cliente e ingrese la cedula: " + recompensaDTO.getCedula() + " para conocer las recompensas a las que puede acceder actualmente");
 
         RespuestaDTO respuestaActual = recompensaLogica.redimirRecompensa(recompensaDTO);
         assertEquals(respuestaDTOEsperada, respuestaActual);
