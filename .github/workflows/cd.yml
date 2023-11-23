@@ -16,6 +16,6 @@ jobs:
           image: samuelrg123/lealtad
           tags: v1.0,latest
           registry: docker.io
-          dockerfile: lealtad/Dockerfile
+          dockerfile: -from:lealtad . Dockerfile
           username: ${{ secrets.USERNAME_DOCKER }}
           password: ${{ secrets.PASSWORD_DOCKER }}
