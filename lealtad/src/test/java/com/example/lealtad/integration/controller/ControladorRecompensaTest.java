@@ -30,19 +30,30 @@ class ControladorRecompensaTest {
     void Dado_GetRequest_Cuando_recompensas_Entonces_recibe_detalleRecompensaDTO_recompensas() {
         RecompensaEntidadDTO recompensaEntidadDTO = new RecompensaEntidadDTO(1, "Tarjeta $10", "Recibe una tarjeta de regalo de $10 para gastar en nuestra tienda", 1);
         RecompensaEntidadDTO recompensaEntidadDTO_2 = new RecompensaEntidadDTO(2, "Tarjeta $20", "Recibe una tarjeta de regalo de $20 para gastar en nuestra tienda", 2);
+        RecompensaEntidadDTO recompensaEntidadDTO_3 = new RecompensaEntidadDTO(3, "Tarjeta $20", "Recibe una tarjeta de regalo de $20 para gastar en nuestra tienda", 1);
+
         restTemplate.postForEntity("/recompensa/guardar", recompensaEntidadDTO_2, RespuestaDTO.class);
 
         DetalleRecompensaDTO detalleRecompensaDTO = new DetalleRecompensaDTO();
+        detalleRecompensaDTO.setId(recompensaEntidadDTO.getIdRecompensa());
         detalleRecompensaDTO.setNombre(recompensaEntidadDTO.getNombre());
         detalleRecompensaDTO.setDescripcion(recompensaEntidadDTO.getDescripcion());
         detalleRecompensaDTO.setPuntosNecesarios(recompensaEntidadDTO.getPuntosNecesarios());
 
         DetalleRecompensaDTO detalleRecompensaDTO_2 = new DetalleRecompensaDTO();
+        detalleRecompensaDTO_2.setId(recompensaEntidadDTO_2.getIdRecompensa());
         detalleRecompensaDTO_2.setNombre(recompensaEntidadDTO_2.getNombre());
         detalleRecompensaDTO_2.setDescripcion(recompensaEntidadDTO_2.getDescripcion());
         detalleRecompensaDTO_2.setPuntosNecesarios(recompensaEntidadDTO_2.getPuntosNecesarios());
 
-        DetalleRecompensaDTO[] recompensasEsperadas = {detalleRecompensaDTO, detalleRecompensaDTO_2};
+        DetalleRecompensaDTO detalleRecompensaDTO_3 = new DetalleRecompensaDTO();
+        detalleRecompensaDTO_3.setId(recompensaEntidadDTO_3.getIdRecompensa());
+        detalleRecompensaDTO_3.setNombre(recompensaEntidadDTO_3.getNombre());
+        detalleRecompensaDTO_3.setDescripcion(recompensaEntidadDTO_3.getDescripcion());
+        detalleRecompensaDTO_3.setPuntosNecesarios(recompensaEntidadDTO_3.getPuntosNecesarios());
+
+
+        DetalleRecompensaDTO[] recompensasEsperadas = {detalleRecompensaDTO, detalleRecompensaDTO_2,detalleRecompensaDTO_3};
 
         ResponseEntity<DetalleRecompensaDTO[]> detalleHistorialDTOResponse = restTemplate.getForEntity("/recompensas", DetalleRecompensaDTO[].class);
         DetalleRecompensaDTO[] recompensas = detalleHistorialDTOResponse.getBody();
@@ -54,6 +65,7 @@ class ControladorRecompensaTest {
         RecompensaEntidadDTO recompensaEntidadDTO_1 = new RecompensaEntidadDTO(1, "Tarjeta $10", "Recibe una tarjeta de regalo de $10 para gastar en nuestra tienda", 1);
 
         DetalleRecompensaDTO detalleRecompensaDTO = new DetalleRecompensaDTO();
+        detalleRecompensaDTO.setId(recompensaEntidadDTO_1.getIdRecompensa());
         detalleRecompensaDTO.setNombre(recompensaEntidadDTO_1.getNombre());
         detalleRecompensaDTO.setDescripcion(recompensaEntidadDTO_1.getDescripcion());
         detalleRecompensaDTO.setPuntosNecesarios(recompensaEntidadDTO_1.getPuntosNecesarios());
@@ -73,7 +85,7 @@ class ControladorRecompensaTest {
     }
 
     @Test
-    void Dado_recompensaDTO_IdRecompensa_1_Cuando_PostRequest_redimir_recompensa_Entonces_devuelve_respuestaDTO() {
+    void Dado_recompensaDTO_IdRecompensa_3_Cuando_PostRequest_redimir_recompensa_Entonces_devuelve_respuestaDTO() {
         ClienteDTO dto = new ClienteDTO(5, "Prueba5", "Integracion5", "pruebas@pruebas.com", 1234);
         restTemplate.postForEntity("/cliente/guardar", dto, RespuestaDTO.class);
 
@@ -82,7 +94,10 @@ class ControladorRecompensaTest {
         transaccionDTO.setMonto(2);
         restTemplate.postForEntity("/transaccion/guardar", transaccionDTO, RespuestaDTO.class);
 
-        RecompensaDTO recompensaDTO = new RecompensaDTO(dto.getCedula(), 1);
+        RecompensaEntidadDTO recompensaEntidadDTO_3 = new RecompensaEntidadDTO(3, "Tarjeta $20", "Recibe una tarjeta de regalo de $20 para gastar en nuestra tienda", 1);
+        restTemplate.postForEntity("/recompensa/guardar", recompensaEntidadDTO_3, RespuestaDTO.class);
+
+        RecompensaDTO recompensaDTO = new RecompensaDTO(dto.getCedula(), 3);
 
         ResponseEntity<RespuestaDTO> respuesta = restTemplate.postForEntity("/redimir-recompensa", recompensaDTO, RespuestaDTO.class);
         assertEquals("Recompensa redimida y registrada con exito. Se han descontado los puntos al cliente", respuesta.getBody().getMensaje());

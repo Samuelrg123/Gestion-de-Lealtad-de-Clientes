@@ -72,7 +72,7 @@ class RecompensaLogicaTest {
         List<Recompensa> recompensaEntityList = new ArrayList<>();
         recompensaEntityList.add(recompensa_1);
 
-        DetalleRecompensaDTO detalleRecompensaDTO_1 = new DetalleRecompensaDTO(recompensa_1.getNombre(), recompensa_1.getDescripcion(), recompensa_1.getPuntosNecesarios());
+        DetalleRecompensaDTO detalleRecompensaDTO_1 = new DetalleRecompensaDTO(recompensa_1.getIdRecompensa(),recompensa_1.getNombre(), recompensa_1.getDescripcion(), recompensa_1.getPuntosNecesarios());
         List<DetalleRecompensaDTO> detalleRecompensaDTOListaEsperada = new ArrayList<>();
         detalleRecompensaDTOListaEsperada.add(detalleRecompensaDTO_1);
 
@@ -109,8 +109,8 @@ class RecompensaLogicaTest {
         recompensaEntityList.add(recompensa_1);
         recompensaEntityList.add(recompensa_2);
 
-        DetalleRecompensaDTO detalleRecompensaDTO_1 = new DetalleRecompensaDTO(recompensa_1.getNombre(), recompensa_1.getDescripcion(), recompensa_1.getPuntosNecesarios());
-        DetalleRecompensaDTO detalleRecompensaDTO_2 = new DetalleRecompensaDTO(recompensa_2.getNombre(), recompensa_2.getDescripcion(), recompensa_2.getPuntosNecesarios());
+        DetalleRecompensaDTO detalleRecompensaDTO_1 = new DetalleRecompensaDTO(recompensa_1.getIdRecompensa(),recompensa_1.getNombre(), recompensa_1.getDescripcion(), recompensa_1.getPuntosNecesarios());
+        DetalleRecompensaDTO detalleRecompensaDTO_2 = new DetalleRecompensaDTO(recompensa_2.getIdRecompensa(),recompensa_2.getNombre(), recompensa_2.getDescripcion(), recompensa_2.getPuntosNecesarios());
 
         List<DetalleRecompensaDTO> detalleRecompensaDTOListaEsperada = new ArrayList<>();
         detalleRecompensaDTOListaEsperada.add(detalleRecompensaDTO_1);
@@ -139,7 +139,7 @@ class RecompensaLogicaTest {
 
         when(puntoLogica.obtenerPuntosActuales(puntoDTO)).thenReturn(0.0);
         when(recompensaRepository.findById(1)).thenReturn(Optional.of(recompensa));
-        RespuestaDTO respuestaDTOEsperada = new RespuestaDTO("No cumple con la cantidad de puntos para redimir esta recompensa. revise http://localhost:8080/recompensas/" + recompensaDTO.getCedula() + " para conocer las recompensas a las que puede acceder actualmente");
+        RespuestaDTO respuestaDTOEsperada = new RespuestaDTO("No cumple con la cantidad de puntos para redimir esta recompensa. Revise Recompensas Por Cliente e ingrese la cedula: " + recompensaDTO.getCedula() + " para conocer las recompensas a las que puede acceder actualmente");
 
         RespuestaDTO respuestaActual = recompensaLogica.redimirRecompensa(recompensaDTO);
         assertEquals(respuestaDTOEsperada, respuestaActual);
