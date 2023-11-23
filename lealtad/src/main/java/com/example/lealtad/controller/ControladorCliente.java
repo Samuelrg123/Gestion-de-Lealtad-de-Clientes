@@ -6,6 +6,7 @@ import com.example.lealtad.logica.ClienteLogica;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000/")
 public class ControladorCliente {
 
     private ClienteLogica clienteLogica;

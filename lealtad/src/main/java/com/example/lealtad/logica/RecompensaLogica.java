@@ -21,12 +21,12 @@ public class RecompensaLogica {
         PuntoDTO puntoDTO = new PuntoDTO();
         puntoDTO.setCliente(recompensaDTO.getCedula());
         double puntosCliente = puntoLogica.obtenerPuntosActuales(puntoDTO);
-        return recompensaRepository.findAllInfoRecompensasByPuntosCliente(puntosCliente).stream().map(recompensa -> new DetalleRecompensaDTO(recompensa.getNombre(), recompensa.getDescripcion(), recompensa.getPuntosNecesarios())).collect(Collectors.toList());
+        return recompensaRepository.findAllInfoRecompensasByPuntosCliente(puntosCliente).stream().map(recompensa -> new DetalleRecompensaDTO(recompensa.getIdRecompensa(), recompensa.getNombre(), recompensa.getDescripcion(), recompensa.getPuntosNecesarios())).collect(Collectors.toList());
 
     }
 
     public List<DetalleRecompensaDTO> buscarRecompensas() {
-        return recompensaRepository.findAll().stream().map(recompensa -> new DetalleRecompensaDTO(recompensa.getNombre(), recompensa.getDescripcion(), recompensa.getPuntosNecesarios())).collect(Collectors.toList());
+        return recompensaRepository.findAll().stream().map(recompensa -> new DetalleRecompensaDTO(recompensa.getIdRecompensa(),recompensa.getNombre(), recompensa.getDescripcion(), recompensa.getPuntosNecesarios())).collect(Collectors.toList());
     }
 
     public RespuestaDTO redimirRecompensa(RecompensaDTO recompensaDTO) {
@@ -41,7 +41,7 @@ public class RecompensaLogica {
             puntoLogica.actualizarPuntos(new PuntoDTO(recompensaDTO.getCedula(), puntosActualizados));
             return new RespuestaDTO("Recompensa redimida y registrada con exito. Se han descontado los puntos al cliente");
         } else {
-            return new RespuestaDTO("No cumple con la cantidad de puntos para redimir esta recompensa. revise http://localhost:8080/recompensas/" + recompensaDTO.getCedula() + " para conocer las recompensas a las que puede acceder actualmente");
+            return new RespuestaDTO("No cumple con la cantidad de puntos para redimir esta recompensa. revise Recompensas Por Cliente e ingrese la cedula: " + recompensaDTO.getCedula() + " para conocer las recompensas a las que puede acceder actualmente");
         }
     }
 
